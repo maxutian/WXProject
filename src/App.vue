@@ -22,5 +22,7 @@ export default {
 </script>
 
 <style>
-
+ body {
+   padding-bottom: 2rem !important;
+ }
 </style>

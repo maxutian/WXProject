@@ -2,8 +2,8 @@
   <div class="v-item-container">
     <md-card v-for="(item, index) in this.$store.state.result" :key="item.id">
 
-      <md-card-media>
-        <img :src="item.thumb" alt="People" @click="goTo(index)">
+      <md-card-media md-ratio="3:4">
+        <img :src="item.thumb" alt="People" @click="goTo(index)" class="v-item-image">
       </md-card-media>
 
       <md-card-header>
@@ -21,18 +21,18 @@
   export default {
     data () {
       return {
-        name: 'item'
+        name: 'item',
+        width: '42%'
       }
     },
     methods: {
       goTo: function (index) {
-        // window.open(this.$store.state.result[index].url)
-        console.log(this.$store.state.result[index].thumb)
+        window.open(this.$store.state.result[index].url)
       }
     },
     mounted () {
       this.$store.state.result = []
-      this.axios.get('http://39.108.155.202:8080/ecyk/data.json').then((res) => {
+      this.axios.get('http://39.108.155.202/jsons/movie.json').then((res) => {
         this.$store.state.result = res.data.movie
       })
     }
@@ -45,7 +45,11 @@
     flex-wrap: wrap;
     align-items: flex-start;
     width: 100%;
-    margin-bottom: 1.9rem !important;
+    margin-top: 1.5rem !important;
+  }
+
+  .v-item-image {
+    width: 100%;
   }
 
   .md-card {

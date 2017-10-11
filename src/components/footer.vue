@@ -42,4 +42,8 @@ export default {
 .md-text {
   font-size: 16px;
 }
+
+.md-bottom-bar-item.md-active .md-text, .md-bottom-bar-item.md-active .md-icon {
+  color: #e482a3;
+}
 </style>
