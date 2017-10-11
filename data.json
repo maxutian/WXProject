@@ -1,0 +1,113 @@
+{
+  "movie": [
+    {
+      "id": 1000,
+      "name": "黑客军团",
+      "code": 1234,
+      "thumb": "http://39.108.155.202:8080/ecyk/images/timg.jpg",
+      "url": "https://www.baidu.com/"
+    },
+    {
+      "id": 1001,
+      "name": "黑客军团",
+      "code": 1234,
+      "thumb": "http://39.108.155.202:8080/ecyk/images/timg.jpg",
+      "url": "https://www.baidu.com/"
+    },
+    {
+      "id": 1002,
+      "name": "黑客军团",
+      "code": 1234,
+      "thumb": "http://39.108.155.202:8080/ecyk/images/timg.jpg",
+      "url": "https://www.baidu.com/"
+    },
+    {
+      "id": 1002,
+      "name": "黑客军团",
+      "code": 1234,
+      "thumb": "http://39.108.155.202:8080/ecyk/images/timg.jpg",
+      "url": "https://www.baidu.com/"
+    },
+    {
+      "id": 1002,
+      "name": "黑客军团",
+      "code": 1234,
+      "thumb": "http://39.108.155.202:8080/ecyk/images/timg.jpg",
+      "url": "https://www.baidu.com/"
+    }
+  ],
+  "animation": [
+    {
+      "id": 1000,
+      "name": "黑客军团2",
+      "code": 1234,
+      "thumb": "http://39.108.155.202:8080/ecyk/images/timg.jpg",
+      "url": "https://www.baidu.com/"
+    },
+    {
+      "id": 1001,
+      "name": "黑客军团2",
+      "code": 1234,
+      "thumb": "http://39.108.155.202:8080/ecyk/images/timg.jpg",
+      "url": "https://www.baidu.com/"
+    },
+    {
+      "id": 1002,
+      "name": "黑客军团2",
+      "code": 1234,
+      "thumb": "http://39.108.155.202:8080/ecyk/images/timg.jpg",
+      "url": "https://www.baidu.com/"
+    },
+    {
+      "id": 1002,
+      "name": "黑客军团2",
+      "code": 1234,
+      "thumb": "http://39.108.155.202:8080/ecyk/images/timg.jpg",
+      "url": "https://www.baidu.com/"
+    },
+    {
+      "id": 1002,
+      "name": "黑客军团2",
+      "code": 1234,
+      "thumb": "http://39.108.155.202:8080/ecyk/images/timg.jpg",
+      "url": "https://www.baidu.com/"
+    }
+  ],
+  "novel": [
+    {
+      "id": 1000,
+      "name": "黑客军团3",
+      "code": 1234,
+      "thumb": "http://39.108.155.202:8080/ecyk/images/timg.jpg",
+      "url": "https://www.baidu.com/"
+    },
+    {
+      "id": 1001,
+      "name": "黑客军团3",
+      "code": 1234,
+      "thumb": "http://39.108.155.202:8080/ecyk/images/timg.jpg",
+      "url": "https://www.baidu.com/"
+    },
+    {
+      "id": 1002,
+      "name": "黑客军团3",
+      "code": 1234,
+      "thumb": "http://39.108.155.202:8080/ecyk/images/timg.jpg",
+      "url": "https://www.baidu.com/"
+    },
+    {
+      "id": 1002,
+      "name": "黑客军团3",
+      "code": 1234,
+      "thumb": "http://39.108.155.202:8080/ecyk/images/timg.jpg",
+      "url": "https://www.baidu.com/"
+    },
+    {
+      "id": 1002,
+      "name": "黑客军团3",
+      "code": 1234,
+      "thumb": "http://39.108.155.202:8080/ecyk/images/timg.jpg",
+      "url": "https://www.baidu.com/"
+    }
+  ]
+}
