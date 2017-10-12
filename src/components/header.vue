@@ -12,7 +12,8 @@ export default {
 
 <style>
   .v-header-logo {
-    width: 2rem;
+    width: 4.5rem;
+    margin-left: 1%;
   }
 
   .md-theme-default .md-toolbar {
@@ -20,7 +21,7 @@ export default {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: rgba(228,130,163,.9);
+    background-color: rgba(255,112,160,.85);
     box-shadow: 0 1px 3px rgba(0,0,0,.2), 0 1px 1px rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
   }
 </style>

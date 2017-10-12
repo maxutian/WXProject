@@ -19,6 +19,8 @@ export default {
   },
   methods: {
     swipePage: function (type) {
+      this.$store.state.leftColumn = []
+      this.$store.state.rightColumn = []
       this.getData(type)
     }
   }
@@ -43,7 +45,11 @@ export default {
   font-size: 16px;
 }
 
+.md-bottom-bar-item.md-active {
+  padding-top: 9px;
+}
+
 .md-bottom-bar-item.md-active .md-text, .md-bottom-bar-item.md-active .md-icon {
-  color: #e482a3;
+  color: #ff85ae;
 }
 </style>

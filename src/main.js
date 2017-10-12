@@ -18,11 +18,15 @@ Vue.use(utils)
 
 const store = new Vuex.Store({
   state: {
-    result: []
+    leftColumn: [],
+    rightColumn: []
   },
   mutations: {
-    setData: (state, data) => {
-      state.result = data
+    addToLeft: (state, data) => {
+      state.leftColumn.unshift(data)
+    },
+    addToRight: (state, data) => {
+      state.rightColumn.unshift(data)
     }
   }
 })

@@ -1,19 +1,41 @@
 <template>
   <div class="v-item-container">
-    <md-card v-for="(item, index) in this.$store.state.result" :key="item.id">
+    <div class="leftColumn">
 
-      <md-card-media md-ratio="3:4">
-        <img :src="item.thumb" alt="People" @click="goTo(index)" class="v-item-image">
-      </md-card-media>
+      <md-card v-for="(item, index) in this.$store.state.leftColumn" :key="item.id">
 
-      <md-card-header>
-        <md-card-header-text>
-          <div class="md-title" @click="goTo(index)">{{item.name}}</div>
-          <div class="md-subhead">提取码: {{item.code}}</div>
-        </md-card-header-text>
-      </md-card-header>
+        <md-card-media md-ratio="3:4">
+          <img :src="item.thumb" alt="People" @click="goTo(index)" class="v-item-image">
+        </md-card-media>
 
-    </md-card>
+        <md-card-header>
+          <md-card-header-text>
+            <div class="md-title" @click="goTo(index)">{{item.name}}</div>
+            <div class="md-subhead">提取码: {{item.code}}</div>
+          </md-card-header-text>
+        </md-card-header>
+
+      </md-card>
+
+    </div>
+    <div class="rightColumn">
+
+      <md-card v-for="(item, index) in this.$store.state.rightColumn" :key="item.id">
+
+        <md-card-media>
+          <img :src="item.thumb" alt="People" @click="goTo(index)" class="v-item-image">
+        </md-card-media>
+
+        <md-card-header>
+          <md-card-header-text>
+            <div class="md-title" @click="goTo(index)">{{item.name}}</div>
+            <div class="md-subhead">提取码: {{item.code}}</div>
+          </md-card-header-text>
+        </md-card-header>
+
+      </md-card>
+
+    </div>
   </div>
 </template>
 
@@ -21,8 +43,7 @@
   export default {
     data () {
       return {
-        name: 'item',
-        width: '42%'
+        name: 'item'
       }
     },
     methods: {
@@ -31,10 +52,9 @@
       }
     },
     mounted () {
-      this.$store.state.result = []
-      this.axios.get('http://39.108.155.202/jsons/movie.json').then((res) => {
-        this.$store.state.result = res.data.movie
-      })
+      this.$store.state.leftColumn = []
+      this.$store.state.rightColumn = []
+      this.getData('movie')
     }
   }
 </script>
@@ -43,9 +63,20 @@
   .v-item-container {
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-start;
+    flex-direction: row;
     width: 100%;
     margin-top: 1.5rem !important;
+  }
+
+  .leftColumn, .rightColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 48%;
+  }
+
+  .leftColumn {
+    margin-left: 2%;
   }
 
   .v-item-image {
@@ -53,7 +84,7 @@
   }
 
   .md-card {
-    width: 47%;
+    width: 97%;
     margin-top: 0.25rem;
     margin-left: 2%;
   }
