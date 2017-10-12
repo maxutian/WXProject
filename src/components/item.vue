@@ -1,6 +1,6 @@
 <template>
   <div class="v-item-container">
-    <div class="leftColumn">
+    <transition-group tag="div" name="enterAnimation" class="leftColumn">
 
       <md-card v-for="(item, index) in this.$store.state.leftColumn" :key="item.id">
 
@@ -17,12 +17,12 @@
 
       </md-card>
 
-    </div>
-    <div class="rightColumn">
+    </transition-group>
+    <transition-group tag="div" name="enterAnimation" class="rightColumn">
 
       <md-card v-for="(item, index) in this.$store.state.rightColumn" :key="item.id">
 
-        <md-card-media>
+        <md-card-media md-ratio="3:4">
           <img :src="item.thumb" alt="People" @click="goTo(index)" class="v-item-image">
         </md-card-media>
 
@@ -35,7 +35,7 @@
 
       </md-card>
 
-    </div>
+    </transition-group>
   </div>
 </template>
 
@@ -65,7 +65,7 @@
     flex-wrap: wrap;
     flex-direction: row;
     width: 100%;
-    margin-top: 1.5rem !important;
+    margin-top: 1.3rem !important;
   }
 
   .leftColumn, .rightColumn {
@@ -110,5 +110,24 @@
 
   .md-card .md-card-media + .md-card-header {
     padding-top: 0.3rem !important;
+  }
+
+  .enterAnimation-enter,.enterAnimation-leave-active{
+    opacity: 0;
+    transform: translateY(7%);
+  }
+
+  .enterAnimation-enter-to,.enterAnimation-leave {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .enterAnimation-leave-to {
+    opacity: 0;
+    transform: translateY(7%);
+  }
+
+  .enterAnimation-enter-active,.enterAnimation-leave-active{
+    transition: all .6s cubic-bezier(.69,.01,.04,1.17);
   }
 </style>

@@ -52,4 +52,8 @@ export default {
 .md-bottom-bar-item.md-active .md-text, .md-bottom-bar-item.md-active .md-icon {
   color: #ff85ae;
 }
+
+.md-theme-default.md-bottom-bar.md-fixed .md-bottom-bar-item.md-active {
+  border-bottom: 3px solid #ff85ae;
+}
 </style>

@@ -13,7 +13,8 @@ export default {
 <style>
   .v-header-logo {
     width: 4.5rem;
-    margin-left: 1%;
+    margin: 1% 0;
+    margin-left: 3%;
   }
 
   .md-theme-default .md-toolbar {
