@@ -23,10 +23,10 @@ const store = new Vuex.Store({
   },
   mutations: {
     addToLeft: (state, data) => {
-      state.leftColumn.unshift(data)
+      state.leftColumn.push(data)
     },
     addToRight: (state, data) => {
-      state.rightColumn.unshift(data)
+      state.rightColumn.push(data)
     }
   }
 })

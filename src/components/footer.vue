@@ -46,11 +46,11 @@ export default {
 }
 
 .md-bottom-bar-item.md-active {
-  padding-top: 9px;
+  padding-top: 9px !important;
 }
 
 .md-bottom-bar-item.md-active .md-text, .md-bottom-bar-item.md-active .md-icon {
-  color: #ff85ae;
+  color: #ff85ae !important;
 }
 
 .md-theme-default.md-bottom-bar.md-fixed .md-bottom-bar-item.md-active {

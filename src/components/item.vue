@@ -5,12 +5,12 @@
       <md-card v-for="(item, index) in this.$store.state.leftColumn" :key="item.id">
 
         <md-card-media md-ratio="3:4">
-          <img :src="item.thumb" alt="People" @click="goTo(index)" class="v-item-image">
+          <img :src="item.thumb" alt="People" @click="leftGoTo(index)" class="v-item-image">
         </md-card-media>
 
         <md-card-header>
           <md-card-header-text>
-            <div class="md-title" @click="goTo(index)">{{item.name}}</div>
+            <div class="md-title" @click="leftGoTo(index)">{{item.name}}</div>
             <div class="md-subhead">提取码: {{item.code}}</div>
           </md-card-header-text>
         </md-card-header>
@@ -23,12 +23,12 @@
       <md-card v-for="(item, index) in this.$store.state.rightColumn" :key="item.id">
 
         <md-card-media md-ratio="3:4">
-          <img :src="item.thumb" alt="People" @click="goTo(index)" class="v-item-image">
+          <img :src="item.thumb" alt="People" @click="rightGoTo(index)" class="v-item-image">
         </md-card-media>
 
         <md-card-header>
           <md-card-header-text>
-            <div class="md-title" @click="goTo(index)">{{item.name}}</div>
+            <div class="md-title" @click="rightGoTo(index)">{{item.name}}</div>
             <div class="md-subhead">提取码: {{item.code}}</div>
           </md-card-header-text>
         </md-card-header>
@@ -43,12 +43,16 @@
   export default {
     data () {
       return {
-        name: 'item'
+        name: 'item',
+        scroll: ''
       }
     },
     methods: {
-      goTo: function (index) {
-        window.open(this.$store.state.result[index].url)
+      leftGoTo: function (index) {
+        window.open(this.$store.state.leftColumn[index].url)
+      },
+      rightGoTo: function (index) {
+        window.open(this.$store.state.rightColumn[index].url)
       }
     },
     mounted () {
@@ -65,7 +69,7 @@
     flex-wrap: wrap;
     flex-direction: row;
     width: 100%;
-    margin-top: 1.3rem !important;
+    margin-top: 1.5rem !important;
   }
 
   .leftColumn, .rightColumn {
