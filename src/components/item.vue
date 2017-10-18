@@ -55,7 +55,7 @@
         window.open(this.$store.state.rightColumn[index].url)
       }
     },
-    mounted () {
+    created () {
       this.$store.state.leftColumn = []
       this.$store.state.rightColumn = []
       this.getData('movie')
@@ -80,7 +80,7 @@
   }
 
   .leftColumn {
-    margin-left: 2%;
+    margin-left: 1%;
   }
 
   .v-item-image {
