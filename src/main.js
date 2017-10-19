@@ -8,18 +8,21 @@ import VueAxios from 'vue-axios'
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.css'
 import 'lib-flexible/flexible.js'
-import utils from './utils'
+import { InfiniteScroll } from 'mint-ui'
 
 Vue.config.productionTip = false
 Vue.use(Vuex)
 Vue.use(VueAxios, axios)
 Vue.use(VueMaterial)
-Vue.use(utils)
+Vue.use(InfiniteScroll)
 
 const store = new Vuex.Store({
   state: {
     leftColumn: [],
-    rightColumn: []
+    rightColumn: [],
+    allColumns: [],
+    curPage: 1,
+    curTab: 'movie'
   },
   mutations: {
     addToLeft: (state, data) => {
@@ -27,6 +30,22 @@ const store = new Vuex.Store({
     },
     addToRight: (state, data) => {
       state.rightColumn.push(data)
+    },
+    changeCurTab: (state, type) => {
+      state.curPage = 1
+      state.curTab = type
+    }
+  },
+  actions: {
+    getData: (context, type) => {
+      axios.get('http://39.108.155.202/jsons/' + type + '.json').then((res) => {
+        context.state.allColumns = res.data[type]
+        for (let i = 10 * (context.state.curPage - 1); i < 10 * context.state.curPage; i++) {
+          if (res.data[type][i]) {
+            res.data[type][i].id % 2 === 0 ? context.commit('addToRight', res.data[type][i]) : context.commit('addToLeft', res.data[type][i])
+          }
+        }
+      })
     }
   }
 })

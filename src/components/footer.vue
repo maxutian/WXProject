@@ -1,9 +1,9 @@
 
 <template>
   <md-bottom-bar class="footer">
-    <md-bottom-bar-item md-active @click.native="swipePage(movie)">影视</md-bottom-bar-item>
-    <md-bottom-bar-item @click.native="swipePage(animation)">动漫</md-bottom-bar-item>
-    <md-bottom-bar-item @click.native="swipePage(novel)">小说</md-bottom-bar-item>
+    <md-bottom-bar-item md-active @click.native="swipePage('movie')">影视</md-bottom-bar-item>
+    <md-bottom-bar-item @click.native="swipePage('animation')">动漫</md-bottom-bar-item>
+    <md-bottom-bar-item @click.native="swipePage('novel')">小说</md-bottom-bar-item>
   </md-bottom-bar>
 </template>
 
@@ -12,16 +12,16 @@ export default {
   name: 'footer',
   data () {
     return {
-      movie: 'movie',
-      animation: 'animation',
-      novel: 'novel'
     }
   },
   methods: {
     swipePage: function (type) {
       this.$store.state.leftColumn = []
       this.$store.state.rightColumn = []
-      this.getData(type)
+      this.$store.commit('changeCurTab', type)
+      this.$store.dispatch('getData', type)
+      document.body.scrollTop = 0
+      document.documentElement.scrollTop = 0
     }
   }
 }

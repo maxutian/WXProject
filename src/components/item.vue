@@ -1,5 +1,8 @@
 <template>
-  <div class="v-item-container">
+  <div class="v-item-container" id="item-container" 
+    v-infinite-scroll="loadMore"
+    infinite-scroll-disabled="loading"
+    infinite-scroll-distance="10">
     <transition-group tag="div" name="enterAnimation" class="leftColumn">
 
       <md-card v-for="(item, index) in this.$store.state.leftColumn" :key="item.id">
@@ -44,6 +47,7 @@
     data () {
       return {
         name: 'item',
+        loading: false,
         scroll: ''
       }
     },
@@ -53,12 +57,20 @@
       },
       rightGoTo: function (index) {
         window.open(this.$store.state.rightColumn[index].url)
+      },
+      loadMore: function () {
+        setTimeout(() => {
+          this.loading = true
+          this.$store.state.curPage++
+          this.$store.dispatch('getData', this.$store.state.curTab)
+          this.loading = false
+        }, 200)
       }
     },
     created () {
       this.$store.state.leftColumn = []
       this.$store.state.rightColumn = []
-      this.getData('movie')
+      this.$store.dispatch('getData', 'movie')
     }
   }
 </script>
