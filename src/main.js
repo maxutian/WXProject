@@ -22,7 +22,8 @@ const store = new Vuex.Store({
     rightColumn: [],
     allColumns: [],
     curPage: 1,
-    curTab: 'movie'
+    curTab: 'movie',
+    firstLoad: true
   },
   mutations: {
     addToLeft: (state, data) => {
@@ -45,6 +46,7 @@ const store = new Vuex.Store({
             res.data[type][i].id % 2 === 0 ? context.commit('addToRight', res.data[type][i]) : context.commit('addToLeft', res.data[type][i])
           }
         }
+        context.state.firstLoad = false
       })
     }
   }

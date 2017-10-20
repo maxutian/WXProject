@@ -59,12 +59,12 @@
         window.open(this.$store.state.rightColumn[index].url)
       },
       loadMore: function () {
-        setTimeout(() => {
+        if (!this.$store.state.firstLoad) {
           this.loading = true
           this.$store.state.curPage++
           this.$store.dispatch('getData', this.$store.state.curTab)
           this.loading = false
-        }, 200)
+        }
       }
     },
     created () {
