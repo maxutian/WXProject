@@ -62,7 +62,7 @@
         if (!this.$store.state.firstLoad) {
           this.loading = true
           this.$store.state.curPage++
-          this.$store.dispatch('getData', this.$store.state.curTab)
+          this.loadData()
           this.loading = false
         }
       }
@@ -70,6 +70,7 @@
     created () {
       this.$store.state.leftColumn = []
       this.$store.state.rightColumn = []
+      this.$store.state.allColumns = []
       this.$store.dispatch('getData', 'movie')
     }
   }
@@ -130,20 +131,17 @@
 
   .enterAnimation-enter,.enterAnimation-leave-active{
     opacity: 0;
-    transform: translateY(7%);
   }
 
   .enterAnimation-enter-to,.enterAnimation-leave {
     opacity: 1;
-    transform: translateY(0);
   }
 
   .enterAnimation-leave-to {
     opacity: 0;
-    transform: translateY(7%);
   }
 
   .enterAnimation-enter-active,.enterAnimation-leave-active{
-    transition: all .6s cubic-bezier(.69,.01,.04,1.17);
+    transition: all .4s cubic-bezier(.69,.01,.04,1.17);
   }
 </style>

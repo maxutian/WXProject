@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import Vuex from 'vuex'
 import axios from 'axios'
+import utils from './utils'
 import VueAxios from 'vue-axios'
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.css'
@@ -15,6 +16,7 @@ Vue.use(Vuex)
 Vue.use(VueAxios, axios)
 Vue.use(VueMaterial)
 Vue.use(InfiniteScroll)
+Vue.use(utils)
 
 const store = new Vuex.Store({
   state: {
@@ -22,7 +24,6 @@ const store = new Vuex.Store({
     rightColumn: [],
     allColumns: [],
     curPage: 1,
-    curTab: 'movie',
     firstLoad: true
   },
   mutations: {
@@ -31,19 +32,16 @@ const store = new Vuex.Store({
     },
     addToRight: (state, data) => {
       state.rightColumn.push(data)
-    },
-    changeCurTab: (state, type) => {
-      state.curPage = 1
-      state.curTab = type
     }
   },
   actions: {
     getData: (context, type) => {
       axios.get('http://39.108.155.202/jsons/' + type + '.json').then((res) => {
         context.state.allColumns = res.data[type]
+        context.state.curPage = 1
         for (let i = 10 * (context.state.curPage - 1); i < 10 * context.state.curPage; i++) {
-          if (res.data[type][i]) {
-            res.data[type][i].id % 2 === 0 ? context.commit('addToRight', res.data[type][i]) : context.commit('addToLeft', res.data[type][i])
+          if (context.state.allColumns[i]) {
+            context.state.allColumns[i].id % 2 === 0 ? context.commit('addToRight', context.state.allColumns[i]) : context.commit('addToLeft', context.state.allColumns[i])
           }
         }
         context.state.firstLoad = false

@@ -18,7 +18,7 @@ export default {
     swipePage: function (type) {
       this.$store.state.leftColumn = []
       this.$store.state.rightColumn = []
-      this.$store.commit('changeCurTab', type)
+      this.$store.state.allColumns = []
       this.$store.dispatch('getData', type)
       document.body.scrollTop = 0
       document.documentElement.scrollTop = 0
