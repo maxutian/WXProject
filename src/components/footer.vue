@@ -1,7 +1,8 @@
 
 <template>
   <md-bottom-bar class="footer">
-    <md-bottom-bar-item md-active @click.native="swipePage('movie')">影视</md-bottom-bar-item>
+    <md-bottom-bar-item md-active @click.native="swipePage('movie')">电影</md-bottom-bar-item>
+    <md-bottom-bar-item class="moveUp" @click.native="swipePage('TVShow')">追剧</md-bottom-bar-item>
     <md-bottom-bar-item @click.native="swipePage('animation')">动漫</md-bottom-bar-item>
     <md-bottom-bar-item @click.native="swipePage('novel')">小说</md-bottom-bar-item>
   </md-bottom-bar>
@@ -43,6 +44,10 @@ export default {
 
 .md-text {
   font-size: 16px;
+}
+
+.moveUp {
+  margin-bottom: 10% !important
 }
 
 .md-bottom-bar-item.md-active {
