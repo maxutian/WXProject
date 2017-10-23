@@ -22,6 +22,6 @@ export default {
   }
 
   body {
-    padding-bottom: 2rem !important;
+    padding-bottom: .5rem !important;
   }
 </style>

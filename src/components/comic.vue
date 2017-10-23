@@ -54,18 +54,10 @@
     },
     methods: {
       leftGoTo: function (index) {
-        if (this.$store.state.curTab === 'comic') {
-          this.$router.push({path: '/comic'})
-        } else {
-          window.open(this.$store.state.leftColumn[index].url)
-        }
+        window.open(this.$store.state.leftColumn[index].url)
       },
       rightGoTo: function (index) {
-        if (this.$store.state.curTab === 'comic') {
-          this.$router.push({path: '/comic'})
-        } else {
-          window.open(this.$store.state.leftColumn[index].url)
-        }
+        window.open(this.$store.state.rightColumn[index].url)
       },
       loadMore: function () {
         if (!this.$store.state.firstLoad) {
@@ -76,9 +68,11 @@
         }
       }
     },
-    created () {
-      this.initData()
-      this.$store.dispatch('getData', 'movie')
+    mounted () {
+      this.$store.state.leftColumn = []
+      this.$store.state.rightColumn = []
+      this.$store.state.allColumns = []
+      this.$store.dispatch('getData', 'comic')
     }
   }
 </script>

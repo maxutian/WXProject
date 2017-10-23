@@ -6,7 +6,11 @@ export default{
           this.$store.state.allColumns[i].id % 2 === 0 ? this.$store.commit('addToRight', this.$store.state.allColumns[i]) : this.$store.commit('addToLeft', this.$store.state.allColumns[i])
         }
       }
-      this.$store.state.firstLoad = false
+    }
+    Vue.prototype.initData = function () {
+      this.$store.state.leftColumn = []
+      this.$store.state.rightColumn = []
+      this.$store.state.allColumns = []
     }
   }
 }

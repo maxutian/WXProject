@@ -1,6 +1,6 @@
 <template>
   <div>
-    <md-toolbar class="md-dense" v-if="isTop">
+    <md-toolbar class="md-dense">
       <md-button class="md-icon-button" @click="$refs.sidenav.toggle()">
         <md-icon>menu</md-icon>
       </md-button>
@@ -15,27 +15,27 @@
 
       <md-list>
         <md-list-item @click="$refs.sidenav.toggle(), swipePage('movie')" 
-                      :class="[curTab === 'movie' ? activeClass : '']">
+                      :class="[this.$store.state.curTab === 'movie' ? activeClass : '']">
           <md-icon>movie</md-icon> <span>电影</span>
         </md-list-item>
 
         <md-list-item @click="$refs.sidenav.toggle(), swipePage('TVShow')" 
-                      :class="[curTab === 'TVShow' ? activeClass : '']">
+                      :class="[this.$store.state.curTab === 'TVShow' ? activeClass : '']">
           <md-icon>live_tv</md-icon> <span>电视剧</span>
         </md-list-item>
 
         <md-list-item @click="$refs.sidenav.toggle(), swipePage('animation')" 
-                      :class="[curTab === 'animation' ? activeClass : '']">
+                      :class="[this.$store.state.curTab === 'animation' ? activeClass : '']">
           <md-icon>child_care</md-icon> <span>动漫</span>
         </md-list-item>
 
         <md-list-item @click="$refs.sidenav.toggle(), swipePage('novel')" 
-                      :class="[curTab === 'novel' ? activeClass : '']">
+                      :class="[this.$store.state.curTab === 'novel' ? activeClass : '']">
           <md-icon>book</md-icon> <span>小说</span>
         </md-list-item>
 
-        <md-list-item @click="$refs.sidenav.toggle(), swipePage('comic')" 
-                      :class="[curTab === 'comic' ? activeClass : '']">
+        <md-list-item @click="$refs.sidenav.toggle(), swipePage('comic')"
+                      :class="[this.$store.state.curTab === 'comic' ? activeClass : '']">
           <md-icon>photo_album</md-icon> <span>漫画</span>
         </md-list-item>
       </md-list>
@@ -48,8 +48,6 @@ export default {
   name: 'header',
   data () {
     return {
-      isTop: true,
-      curTab: 'movie',
       activeClass: 'md-primary'
     }
   },
@@ -58,13 +56,18 @@ export default {
       this.scroll = document.body.scrollTop
     },
     swipePage: function (type) {
-      this.curTab = type
-      this.$store.state.leftColumn = []
-      this.$store.state.rightColumn = []
-      this.$store.state.allColumns = []
-      this.$store.dispatch('getData', type)
-      document.body.scrollTop = 0
-      document.documentElement.scrollTop = 0
+      if (this.$route.path === '/comic') {
+        this.$store.state.firstLoad = true
+        this.$router.push({path: '/'})
+        this.$store.commit('switchTab', type)
+        this.$store.dispatch('getData', type)
+      } else {
+        this.$store.commit('switchTab', type)
+        this.initData()
+        this.$store.dispatch('getData', type)
+        document.body.scrollTop = 0
+        document.documentElement.scrollTop = 0
+      }
     }
   }
 }
