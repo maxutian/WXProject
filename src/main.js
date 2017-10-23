@@ -5,6 +5,7 @@ import App from './App'
 import Vuex from 'vuex'
 import axios from 'axios'
 import utils from './utils'
+import router from './router'
 import VueAxios from 'vue-axios'
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.css'
@@ -54,5 +55,6 @@ const store = new Vuex.Store({
 new Vue({
   el: '#app',
   store,
+  router,
   render: h => h(App)
 }).$mount('#app')

@@ -8,7 +8,7 @@
       <md-card v-for="(item, index) in this.$store.state.leftColumn" :key="item.id">
 
         <md-card-media md-ratio="3:4">
-          <img :src="item.thumb" alt="People" @click="leftGoTo(index)" class="v-item-image">
+          <img :src="item.thumb" alt="People" @click="leftGoTo(index)" class="v-item-image"/>
         </md-card-media>
 
         <md-card-header>
@@ -26,7 +26,7 @@
       <md-card v-for="(item, index) in this.$store.state.rightColumn" :key="item.id">
 
         <md-card-media md-ratio="3:4">
-          <img :src="item.thumb" alt="People" @click="rightGoTo(index)" class="v-item-image">
+          <img :src="item.thumb" alt="People" @click="rightGoTo(index)" class="v-item-image"/>
         </md-card-media>
 
         <md-card-header>
@@ -82,18 +82,32 @@
     flex-wrap: wrap;
     flex-direction: row;
     width: 100%;
-    margin-top: 1.5rem !important;
+    margin-top: 1.3rem !important;
+  }
+
+  @media (max-width: 350px) {
+    .v-item-container {
+      margin-top: 1.5rem !important;
+    }
+  }
+
+  .md-theme-default .md-toolbar {
+    height: 1.3rem;
   }
 
   .leftColumn, .rightColumn {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 48%;
+    width: 48.5%;
   }
 
   .leftColumn {
     margin-left: 1%;
+  }
+
+  .rightColumn {
+    margin-left: 0.5%;
   }
 
   .v-item-image {
@@ -102,7 +116,7 @@
 
   .md-card {
     width: 97%;
-    margin-top: 0.25rem;
+    margin-top: 0.2rem;
     margin-left: 2%;
   }
 
@@ -113,7 +127,8 @@
   .md-card .md-title {
     cursor: pointer;
     font-size: 0.5rem !important;
-    margin-top: -0.1rem !important;
+    font-weight: 600 !important;
+    margin-top: -0.3rem !important;
   }
 
   .md-card .md-subhead {

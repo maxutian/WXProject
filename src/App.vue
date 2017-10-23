@@ -1,28 +1,27 @@
 <template>
   <div id="app">
     <v-header></v-header>
-    <item></item>
-    <v-footer></v-footer>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import header from './components/header'
-import item from './components/item'
-import footer from './components/footer'
 
 export default {
   name: 'app',
   components: {
-    'v-header': header,
-    'item': item,
-    'v-footer': footer
+    'v-header': header
   }
 }
 </script>
 
 <style>
- body {
-   padding-bottom: 2rem !important;
- }
+  * {
+    font-family: '微软雅黑';
+  }
+
+  body {
+    padding-bottom: 2rem !important;
+  }
 </style>
