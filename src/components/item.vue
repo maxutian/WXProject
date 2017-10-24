@@ -14,7 +14,7 @@
         <md-card-header>
           <md-card-header-text>
             <div class="md-title" @click="leftGoTo(index)">{{item.name}}</div>
-            <div class="md-subhead" v-show="!comic">提取码: {{item.code}}</div>
+            <div class="md-subhead">提取码: {{item.code}}</div>
           </md-card-header-text>
         </md-card-header>
 
@@ -48,24 +48,26 @@
       return {
         name: 'item',
         loading: false,
-        scroll: '',
-        comic: this.$store.state.isComic
+        scroll: ''
       }
     },
     methods: {
       leftGoTo: function (index) {
         if (this.$store.state.curTab === 'comic') {
-          this.$router.push({path: '/comic'})
+          this.routerGoTo(index)
         } else {
           window.open(this.$store.state.leftColumn[index].url)
         }
       },
       rightGoTo: function (index) {
         if (this.$store.state.curTab === 'comic') {
-          this.$router.push({path: '/comic'})
+          this.routerGoTo(index)
         } else {
-          window.open(this.$store.state.leftColumn[index].url)
+          window.open(this.$store.state.rightColumn[index].url)
         }
+      },
+      routerGoTo: function (index) {
+        this.$router.push({path: '/chapter', query: {id: this.$store.state.allColumns[index].id}})
       },
       loadMore: function () {
         if (!this.$store.state.firstLoad) {
@@ -76,9 +78,9 @@
         }
       }
     },
-    created () {
+    mounted () {
       this.initData()
-      this.$store.dispatch('getData', 'movie')
+      this.$store.dispatch('getData', this.$store.state.curTab)
     }
   }
 </script>

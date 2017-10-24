@@ -24,10 +24,11 @@ const store = new Vuex.Store({
     leftColumn: [],
     rightColumn: [],
     allColumns: [],
+    chapters: [],
     curPage: 1,
     curTab: 'movie',
-    isComic: false,
-    firstLoad: true
+    firstLoad: true,
+    enterIndex: false
   },
   mutations: {
     addToLeft: (state, data) => {
@@ -36,13 +37,23 @@ const store = new Vuex.Store({
     addToRight: (state, data) => {
       state.rightColumn.push(data)
     },
+    addToChapter: (state, data) => {
+      state.chapters = data
+    },
     switchTab: (state, type) => {
       state.curTab = type
+    },
+    enterIndex: (state) => {
+      state.enterIndex = true
     }
   },
   actions: {
     getData: (context, type) => {
       context.state.curPage = 1
+      if (context.state.enterIndex) {
+        context.state.curPage--
+        context.state.enterIndex = false
+      }
       axios.get('http://39.108.155.202/jsons/' + type + '.json').then((res) => {
         context.state.allColumns = res.data[type]
         for (let i = 10 * (context.state.curPage - 1); i < 10 * context.state.curPage; i++) {
@@ -50,7 +61,6 @@ const store = new Vuex.Store({
             context.state.allColumns[i].id % 2 === 0 ? context.commit('addToRight', context.state.allColumns[i]) : context.commit('addToLeft', context.state.allColumns[i])
           }
         }
-        console.log(context.state.allColumns)
         context.state.firstLoad = false
       })
     }

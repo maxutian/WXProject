@@ -4,13 +4,12 @@
       <md-button class="md-icon-button" @click="$refs.sidenav.toggle()">
         <md-icon>menu</md-icon>
       </md-button>
-      <img src="../../static/logo.png" alt="logo" class="v-header-logo">
-      <!-- <img :src="url" @click="changeUrl" class="faceImg"> -->
+      <!-- <img src="../../static/logo.png" alt="logo" class="v-header-logo"> -->
     </md-toolbar>
 
     <md-sidenav class="md-left" ref="sidenav">
       <md-toolbar class="md-account-header">
-        
+        <img src="../../static/sidebarLogo.png" alt="logo" class="sidebar-logo"/>
       </md-toolbar>
 
       <md-list>
@@ -56,14 +55,16 @@ export default {
       this.scroll = document.body.scrollTop
     },
     swipePage: function (type) {
-      if (this.$route.path === '/comic') {
-        this.$store.state.firstLoad = true
-        this.$router.push({path: '/'})
+      if (this.$route.path !== '/') {
         this.$store.commit('switchTab', type)
-        this.$store.dispatch('getData', type)
-      } else {
-        this.$store.commit('switchTab', type)
+        this.$store.commit('enterIndex')
         this.initData()
+        this.$router.push({path: '/'})
+        document.body.scrollTop = 0
+        document.documentElement.scrollTop = 0
+      } else {
+        this.initData()
+        this.$store.commit('switchTab', type)
         this.$store.dispatch('getData', type)
         document.body.scrollTop = 0
         document.documentElement.scrollTop = 0
@@ -84,6 +85,12 @@ export default {
     width: 20%;
     margin-top: 2%;
     margin-left: 29%;
+  }
+
+  .sidebar-logo {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-left: .2rem;
   }
 
   .md-theme-default .md-toolbar {
