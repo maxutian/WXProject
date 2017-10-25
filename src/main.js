@@ -24,7 +24,6 @@ const store = new Vuex.Store({
     leftColumn: [],
     rightColumn: [],
     allColumns: [],
-    chapters: [],
     curPage: 1,
     curTab: 'movie',
     firstLoad: true,
@@ -36,9 +35,6 @@ const store = new Vuex.Store({
     },
     addToRight: (state, data) => {
       state.rightColumn.push(data)
-    },
-    addToChapter: (state, data) => {
-      state.chapters = data
     },
     switchTab: (state, type) => {
       state.curTab = type

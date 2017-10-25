@@ -2,7 +2,7 @@
   <div class="chapter-container">
     <md-whiteframe md-elevation="1" class="chapter-item" 
                    @click.native="goToDetail(index)"
-                   v-for="(item, index) in this.$store.state.chapters.detail" :key="item.id">
+                   v-for="(item, index) in this.chapters.detail" :key="item.id">
       <p class="chapter-content">{{'第 ' + (index + 1) + ' 章'}}</p>
     </md-whiteframe>
   </div>
@@ -13,19 +13,24 @@
     name: 'chapter',
     data () {
       return {
+        chapters: [],
+        comicIndex: 0
       }
     },
     methods: {
       goToDetail: function (index) {
-        this.$router.push({path: '/detail', query: {index: index}})
+        this.$router.push({path: '/detail', query: {comicIndex: this.comicIndex, index: index}})
       }
     },
     created () {
-      for (let i in this.$store.state.allColumns) {
-        if (this.$store.state.allColumns[i].id === this.$route.query.id) {
-          this.$store.commit('addToChapter', this.$store.state.allColumns[i])
+      this.axios.get('http://39.108.155.202/jsons/comic.json').then((res) => {
+        for (let i in res.data.comic) {
+          if (this.$route.query.id === res.data.comic[i].id) {
+            this.chapters = res.data.comic[i]
+            this.comicIndex = i
+          }
         }
-      }
+      })
     }
   }
 </script>
