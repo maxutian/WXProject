@@ -48,12 +48,15 @@
       return {
         name: 'item',
         loading: false,
-        scroll: ''
+        scroll: '',
+        comicId: 0,
+        comicIndex: 0
       }
     },
     methods: {
       leftGoTo: function (index) {
         if (this.$store.state.curTab === 'comic') {
+          this.comicId = this.$store.state.leftColumn[index].id
           this.routerGoTo(index)
         } else {
           window.open(this.$store.state.leftColumn[index].url)
@@ -61,13 +64,15 @@
       },
       rightGoTo: function (index) {
         if (this.$store.state.curTab === 'comic') {
+          this.comicId = this.$store.state.rightColumn[index].id
           this.routerGoTo(index)
         } else {
           window.open(this.$store.state.rightColumn[index].url)
         }
       },
       routerGoTo: function (index) {
-        this.$router.push({path: '/chapter', query: {id: this.$store.state.allColumns[index].id}})
+        this.matchComic()
+        this.$router.push({path: '/chapter', query: {index: this.comicIndex}})
       },
       loadMore: function () {
         if (!this.$store.state.firstLoad) {
@@ -76,9 +81,16 @@
           this.loadData()
           this.loading = false
         }
+      },
+      matchComic: function () {
+        this.$store.state.allColumns.forEach((item, index) => {
+          if (item.id === this.comicId) {
+            this.comicIndex = index
+          }
+        })
       }
     },
-    mounted () {
+    created () {
       this.initData()
       this.$store.dispatch('getData', this.$store.state.curTab)
     }

@@ -1,5 +1,12 @@
 <template>
   <div class="chapter-container">
+    <div class="backButton">
+      <md-button class="md-icon-button" @click.native="backToList()">
+        <md-icon>arrow_back</md-icon>
+      </md-button>
+
+      <p class="chapter-title">{{this.chapters.name}}</p>
+    </div>
     <md-whiteframe md-elevation="1" class="chapter-item" 
                    @click.native="goToDetail(index)"
                    v-for="(item, index) in this.chapters.detail" :key="item.id">
@@ -13,29 +20,45 @@
     name: 'chapter',
     data () {
       return {
-        chapters: [],
-        comicIndex: 0
+        chapters: []
       }
     },
     methods: {
       goToDetail: function (index) {
-        this.$router.push({path: '/detail', query: {comicIndex: this.comicIndex, index: index}})
+        this.$router.push({path: '/detail', query: {comicIndex: this.$route.query.index, index: index}})
+      },
+      backToList: function () {
+        this.initData()
+        document.body.scrollTop = 0
+        document.documentElement.scrollTop = 0
+        this.$store.commit('switchTab', 'comic')
+        this.$router.push({path: '/'})
+        this.$store.state.firstLoad = true
       }
     },
     created () {
       this.axios.get('http://39.108.155.202/jsons/comic.json').then((res) => {
-        for (let i in res.data.comic) {
-          if (this.$route.query.id === res.data.comic[i].id) {
-            this.chapters = res.data.comic[i]
-            this.comicIndex = i
-          }
-        }
+        this.chapters = res.data.comic[this.$route.query.index]
       })
     }
   }
 </script>
 
-<style>
+<style scoped>
+  .backButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    margin-top: .1rem;
+  }
+
+  .chapter-title {
+    font-size: .47rem;
+    font-weight: 600;
+  }
+
   .chapter-container {
     display: flex;
     flex-wrap: wrap;

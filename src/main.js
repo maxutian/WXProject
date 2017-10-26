@@ -26,8 +26,7 @@ const store = new Vuex.Store({
     allColumns: [],
     curPage: 1,
     curTab: 'movie',
-    firstLoad: true,
-    enterIndex: false
+    firstLoad: true
   },
   mutations: {
     addToLeft: (state, data) => {
@@ -38,18 +37,11 @@ const store = new Vuex.Store({
     },
     switchTab: (state, type) => {
       state.curTab = type
-    },
-    enterIndex: (state) => {
-      state.enterIndex = true
     }
   },
   actions: {
     getData: (context, type) => {
       context.state.curPage = 1
-      if (context.state.enterIndex) {
-        context.state.curPage--
-        context.state.enterIndex = false
-      }
       axios.get('http://39.108.155.202/jsons/' + type + '.json').then((res) => {
         context.state.allColumns = res.data[type]
         for (let i = 10 * (context.state.curPage - 1); i < 10 * context.state.curPage; i++) {

@@ -8,6 +8,7 @@
       <md-button class="detail-button" @click.native="nextPage()">下一页</md-button>
       <md-button class="detail-button" @click.native="nextChapter()">下一章</md-button>
     </div>
+
     <transition name="noMore">
       <div class="detail-toast" v-if="noMore">
         <p class="detail-toast-text">没有了哦~</p>
@@ -21,7 +22,6 @@
     data () {
       return {
         url: '',
-        id: 0,
         content: [],
         chapter: 'chapter',
         cpIndex: 0,
@@ -37,10 +37,10 @@
         this.pageLength = this.content[index][this.chapter].length
       },
       initChapter: function (index) {
-        this.chapter = this.chapter + (index + 1)
+        this.chapter = this.chapter + (index - 0 + 1)
       },
       backToMenu: function () {
-        this.$router.push({path: '/chapter', query: {id: this.id}})
+        this.$router.go(-1)
       },
       nextPage: function () {
         if (this.pageIndex === (this.pageLength - 1)) {
@@ -82,6 +82,7 @@
           this.pageIndex = 0
           this.chapter = 'chapter'
           --this.cpIndex
+          --this.$route.query.index
           this.initChapter(this.cpIndex)
           this.initImg(this.cpIndex)
         }
@@ -89,7 +90,6 @@
     },
     created () {
       this.axios.get('http://39.108.155.202/jsons/comic.json').then((res) => {
-        this.id = res.data.comic[this.$route.query.comicIndex].id
         this.content = res.data.comic[this.$route.query.comicIndex].detail
         this.cpLength = res.data.comic[this.$route.query.comicIndex].detail.length
         this.cpIndex = this.$route.query.index
@@ -100,7 +100,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .detail-container {
     position: relative;
     width: 100%;

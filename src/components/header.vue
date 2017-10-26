@@ -10,6 +10,10 @@
     <md-sidenav class="md-left" ref="sidenav">
       <md-toolbar class="md-account-header">
         <img src="../../static/sidebarLogo.png" alt="logo" class="sidebar-logo"/>
+        <div class="sidebar-text">
+          <p style="font-size: .7rem; font-weight: 600; margin-bottom: -2%; letter-spacing: .05rem;">二次元控</p>
+          <p>CIYUAN2020</p>
+        </div>
       </md-toolbar>
 
       <md-list>
@@ -55,19 +59,16 @@ export default {
       this.scroll = document.body.scrollTop
     },
     swipePage: function (type) {
+      this.initData()
+      document.body.scrollTop = 0
+      document.documentElement.scrollTop = 0
       if (this.$route.path !== '/') {
         this.$store.commit('switchTab', type)
-        this.$store.commit('enterIndex')
-        this.initData()
         this.$router.push({path: '/'})
-        document.body.scrollTop = 0
-        document.documentElement.scrollTop = 0
+        this.$store.state.firstLoad = true
       } else {
-        this.initData()
         this.$store.commit('switchTab', type)
         this.$store.dispatch('getData', type)
-        document.body.scrollTop = 0
-        document.documentElement.scrollTop = 0
       }
     }
   }
@@ -91,6 +92,12 @@ export default {
     width: 2.5rem;
     height: 2.5rem;
     margin-left: .2rem;
+  }
+
+  .sidebar-text {
+    font-size: .3rem;
+    
+    margin-left: 8%;
   }
 
   .md-theme-default .md-toolbar {
