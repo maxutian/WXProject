@@ -1,11 +1,17 @@
 <template>
   <div>
     <md-toolbar class="md-dense">
-      <md-button class="md-icon-button" @click="$refs.sidenav.toggle()">
+      <md-button class="md-icon-button" @click="$refs.sidenav.toggle(), hideTips()">
         <md-icon>menu</md-icon>
       </md-button>
-      <!-- <img src="../../static/logo.png" alt="logo" class="v-header-logo"> -->
     </md-toolbar>
+
+    <transition name="tips">
+      <div class="tips" v-if="showTips">
+        <div class="arrow_left"></div>
+        <p class="tips_text">菜单栏在这里哦~</p>
+      </div>
+    </transition>
 
     <md-sidenav class="md-left" ref="sidenav">
       <md-toolbar class="md-account-header">
@@ -51,13 +57,11 @@ export default {
   name: 'header',
   data () {
     return {
-      activeClass: 'md-primary'
+      activeClass: 'md-primary',
+      showTips: false
     }
   },
   methods: {
-    menu: function () {
-      this.scroll = document.body.scrollTop
-    },
     swipePage: function (type) {
       this.initData()
       document.body.scrollTop = 0
@@ -70,7 +74,19 @@ export default {
         this.$store.commit('switchTab', type)
         this.$store.dispatch('getData', type)
       }
+    },
+    hideTips: function () {
+      this.showTips = false
+      clearTimeout()
     }
+  },
+  created () {
+    setTimeout(() => {
+      this.showTips = true
+    }, 500)
+    setTimeout(() => {
+      this.showTips = false
+    }, 4500)
   }
 }
 </script>
@@ -80,6 +96,67 @@ export default {
     width: 4.5rem !important;
     margin: 1% 0 !important;
     margin-left: 3% !important;
+  }
+
+  .arrow_left {
+    z-index: 9;
+    width: 0;
+    height: 0;
+    border: .2rem solid transparent;
+    border-right: .25rem solid rgba(0, 0, 0, .6);
+  }
+
+  .tips {
+    z-index: 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    left: 12%;
+    top: .18rem;
+    max-height: 1rem;
+  }
+
+  .tips_text {
+    padding: .2rem;
+    color: rgba(255, 255, 255, .6);
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, .6);
+  }
+
+  @media (max-width: 350px) {
+    .tips {
+      top: .3rem !important;
+    }
+  }
+
+  @media (min-width: 750px) {
+    .tips {
+      left: 6% !important;
+    }
+
+    .sidebar-logo {
+      width: 2.5rem;
+      height: 2.5rem;
+      margin-left: .2rem;
+      margin-top: .5rem;
+    }
+  }
+
+  .tips-enter,.tips-leave-to{
+    opacity: 0;
+  }
+
+  .tips-enter-to,.tips-leave {
+    opacity: 1;
+  }
+
+  .tips-leave-active{
+    transition: all .5s cubic-bezier(.69,.01,.04,1.17);
+  }
+
+  .tips-enter-active {
+    transition: all .5s cubic-bezier(.69,.01,.04,1.17);
   }
 
   .faceImg {

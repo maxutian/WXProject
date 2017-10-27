@@ -99,4 +99,8 @@
 
 <style>
   @import url('../styles/item.css');
+
+  .hideSubhead {
+    display: none;
+  }
 </style>
