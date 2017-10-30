@@ -89,9 +89,9 @@
       }
     },
     created () {
-      this.axios.get('http://39.108.155.202/jsons/comic.json').then((res) => {
-        this.content = res.data.comic[this.$route.query.comicIndex].detail
-        this.cpLength = res.data.comic[this.$route.query.comicIndex].detail.length
+      this.axios.get('http://39.108.155.202/jsons/comics/' + this.$route.query.id + '.json').then((res) => {
+        this.content = res.data.detail
+        this.cpLength = res.data.detail.length
         this.cpIndex = this.$route.query.index
         this.initChapter(this.$route.query.index)
         this.initImg(this.$route.query.index)

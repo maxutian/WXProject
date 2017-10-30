@@ -49,8 +49,7 @@
         name: 'item',
         loading: false,
         scroll: '',
-        comicId: 0,
-        comicIndex: 0
+        comicId: 0
       }
     },
     methods: {
@@ -71,8 +70,7 @@
         }
       },
       routerGoTo: function (index) {
-        this.matchComic()
-        this.$router.push({path: '/chapter', query: {index: this.comicIndex}})
+        this.$router.push({path: '/chapter', query: {id: this.comicId}})
       },
       loadMore: function () {
         if (!this.$store.state.firstLoad) {
@@ -81,13 +79,6 @@
           this.loadData()
           this.loading = false
         }
-      },
-      matchComic: function () {
-        this.$store.state.allColumns.forEach((item, index) => {
-          if (item.id === this.comicId) {
-            this.comicIndex = index
-          }
-        })
       }
     },
     created () {

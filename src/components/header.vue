@@ -86,7 +86,7 @@ export default {
     }, 500)
     setTimeout(() => {
       this.showTips = false
-    }, 4500)
+    }, 3500)
   }
 }
 </script>
