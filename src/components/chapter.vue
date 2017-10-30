@@ -10,7 +10,7 @@
     <md-whiteframe md-elevation="1" class="chapter-item" 
                    @click.native="goToDetail(index)"
                    v-for="(item, index) in this.chapters" :key="item.id">
-      <p class="chapter-content">{{'第 ' + (index + 1) + ' 章'}}</p>
+      <p class="chapter-content">{{'第 ' + (index + 1) + ' 话'}}</p>
     </md-whiteframe>
   </div>
 </template>
@@ -25,7 +25,7 @@
     },
     methods: {
       goToDetail: function (index) {
-        this.$router.push({path: '/detail', query: {id: this.$route.query.id, index: index}})
+        this.$router.push({path: '/detail', query: {id: this.$route.query.id, index: index, length: this.chapters.length}})
       },
       backToList: function () {
         this.initData()
@@ -37,9 +37,8 @@
       }
     },
     created () {
-      this.axios.get('http://39.108.155.202/jsons/comics/' + this.$route.query.id + '.json').then((res) => {
+      this.axios.get('http://39.108.155.202/jsons/comics/' + this.$route.query.id + '/' + this.$route.query.id + '.json').then((res) => {
         this.chapters = res.data.detail
-        console.log(this.chapters.length)
       })
     }
   }

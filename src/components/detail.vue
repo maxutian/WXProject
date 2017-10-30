@@ -23,9 +23,8 @@
       return {
         url: '',
         content: [],
-        chapter: 'chapter',
-        cpIndex: 0,
         cpLength: 0,
+        cpIndex: 0,
         pageIndex: 0,
         pageLength: 0,
         noMore: false
@@ -33,11 +32,8 @@
     },
     methods: {
       initImg: function (index) {
-        this.url = this.content[index][this.chapter][this.pageIndex].url
-        this.pageLength = this.content[index][this.chapter].length
-      },
-      initChapter: function (index) {
-        this.chapter = this.chapter + (index - 0 + 1)
+        this.url = this.content[index].url
+        this.pageLength = this.content.length
       },
       backToMenu: function () {
         this.$router.go(-1)
@@ -46,30 +42,31 @@
         if (this.pageIndex === (this.pageLength - 1)) {
           this.nextChapter()
         } else {
+          this.noMore = false
           ++this.pageIndex
-          this.initImg(this.cpIndex)
+          this.initImg(this.pageIndex)
         }
       },
       lastPage: function () {
         if (this.pageIndex === 0) {
           this.lastChapter()
         } else {
+          this.noMore = false
           --this.pageIndex
-          this.initImg(this.cpIndex)
+          this.initImg(this.pageIndex)
         }
       },
       nextChapter: function () {
-        if (this.cpIndex === this.cpLength - 1) {
+        if (this.cpIndex === (this.cpLength - 1)) {
           this.noMore = true
           setTimeout(() => {
             this.noMore = false
           }, 2000)
         } else {
+          this.noMore = false
           this.pageIndex = 0
-          this.chapter = 'chapter'
           ++this.cpIndex
-          this.initChapter(this.cpIndex)
-          this.initImg(this.cpIndex)
+          this.loadChapter(this.cpIndex)
         }
       },
       lastChapter: function () {
@@ -79,23 +76,23 @@
             this.noMore = false
           }, 2000)
         } else {
+          this.noMore = false
           this.pageIndex = 0
-          this.chapter = 'chapter'
           --this.cpIndex
-          --this.$route.query.index
-          this.initChapter(this.cpIndex)
-          this.initImg(this.cpIndex)
+          this.loadChapter(this.cpIndex)
         }
+      },
+      loadChapter: function (index) {
+        this.axios.get('http://39.108.155.202/jsons/comics/' + this.$route.query.id + '/' + (index + 1) + '.json').then((res) => {
+          this.content = res.data['chapter' + (index + 1)]
+          this.initImg(0)
+        })
       }
     },
     created () {
-      this.axios.get('http://39.108.155.202/jsons/comics/' + this.$route.query.id + '.json').then((res) => {
-        this.content = res.data.detail
-        this.cpLength = res.data.detail.length
-        this.cpIndex = this.$route.query.index
-        this.initChapter(this.$route.query.index)
-        this.initImg(this.$route.query.index)
-      })
+      this.cpLength = this.$route.query.length
+      this.cpIndex = this.$route.query.index
+      this.loadChapter(this.$route.query.index)
     }
   }
 </script>
