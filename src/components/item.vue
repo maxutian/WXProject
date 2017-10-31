@@ -46,16 +46,17 @@
   export default {
     data () {
       return {
-        name: 'item',
         loading: false,
         scroll: '',
-        comicId: 0
+        comicId: 0,
+        name: ''
       }
     },
     methods: {
       leftGoTo: function (index) {
         if (this.$store.state.curTab === 'comic') {
           this.comicId = this.$store.state.leftColumn[index].id
+          this.name = this.$store.state.leftColumn[index].name
           this.routerGoTo(index)
         } else {
           window.open(this.$store.state.leftColumn[index].url)
@@ -64,13 +65,14 @@
       rightGoTo: function (index) {
         if (this.$store.state.curTab === 'comic') {
           this.comicId = this.$store.state.rightColumn[index].id
+          this.name = this.$store.state.rightColumn[index].name
           this.routerGoTo(index)
         } else {
           window.open(this.$store.state.rightColumn[index].url)
         }
       },
       routerGoTo: function (index) {
-        this.$router.push({path: '/chapter', query: {id: this.comicId}})
+        this.$router.push({path: '/chapter', query: {id: this.comicId, name: this.name}})
       },
       loadMore: function () {
         if (!this.$store.state.firstLoad) {

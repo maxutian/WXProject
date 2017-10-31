@@ -5,7 +5,7 @@
         <md-icon>arrow_back</md-icon>
       </md-button>
 
-      <p class="chapter-title">{{this.chapters.name}}</p>
+      <p class="chapter-title">{{this.$route.query.name}}</p>
     </div>
     <md-whiteframe md-elevation="1" class="chapter-item" 
                    @click.native="goToDetail(index)"
@@ -37,6 +37,8 @@
       }
     },
     created () {
+      document.body.scrollTop = 0
+      document.documentElement.scrollTop = 0
       this.axios.get('http://39.108.155.202/jsons/comics/' + this.$route.query.id + '/' + this.$route.query.id + '.json').then((res) => {
         this.chapters = res.data.detail
       })

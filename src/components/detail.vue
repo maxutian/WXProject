@@ -2,7 +2,7 @@
   <div class="detail-container">
     <img :src="url" alt="" class="detail-content">
     <div class="button-group">
-      <md-button class="detail-button" @click.native="lastChapter()">上一章</md-button>
+      <md-button class="detail-button" @click.native="lastChapter(0)">上一章</md-button>
       <md-button class="detail-button" @click.native="lastPage()">上一页</md-button>
       <md-button class="md-accent detail-button" @click.native="backToMenu()">目录</md-button>
       <md-button class="detail-button" @click.native="nextPage()">下一页</md-button>
@@ -32,8 +32,8 @@
     },
     methods: {
       initImg: function (index) {
-        this.url = this.content[index].url
         this.pageLength = this.content.length
+        this.url = this.content[index].url
       },
       backToMenu: function () {
         this.$router.go(-1)
@@ -125,7 +125,7 @@
 
   .button-group {
     text-align: center;
-    width: 100%;
+    width: 98%;
   }
 
   .detail-button {
