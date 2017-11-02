@@ -64,8 +64,7 @@ export default {
   methods: {
     swipePage: function (type) {
       this.initData()
-      document.body.scrollTop = 0
-      document.documentElement.scrollTop = 0
+      this.toTop()
       if (this.$route.path !== '/') {
         this.$store.commit('switchTab', type)
         this.$router.push({path: '/'})

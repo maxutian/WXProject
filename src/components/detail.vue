@@ -42,6 +42,7 @@
         if (this.pageIndex === (this.pageLength - 1)) {
           this.nextChapter()
         } else {
+          this.toTop()
           this.noMore = false
           ++this.pageIndex
           this.initImg(this.pageIndex)
@@ -51,6 +52,7 @@
         if (this.pageIndex === 0) {
           this.lastChapter()
         } else {
+          this.toTop()
           this.noMore = false
           --this.pageIndex
           this.initImg(this.pageIndex)
@@ -63,6 +65,7 @@
             this.noMore = false
           }, 2000)
         } else {
+          this.toTop()
           this.noMore = false
           this.pageIndex = 0
           ++this.cpIndex
@@ -76,6 +79,7 @@
             this.noMore = false
           }, 2000)
         } else {
+          this.toTop()
           this.noMore = false
           this.pageIndex = 0
           --this.cpIndex
@@ -125,13 +129,13 @@
 
   .button-group {
     text-align: center;
-    width: 98%;
+    width: 100%;
   }
 
   .detail-button {
     min-width: 1rem !important;
-    margin: .3rem .2rem !important;
-    padding: 0 .2rem !important;
+    margin: .3rem .15rem !important;
+    padding: 0 .1rem !important;
   }
 
   .detail-toast {

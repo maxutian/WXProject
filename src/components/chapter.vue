@@ -29,16 +29,14 @@
       },
       backToList: function () {
         this.initData()
-        document.body.scrollTop = 0
-        document.documentElement.scrollTop = 0
+        this.toTop()
         this.$store.commit('switchTab', 'comic')
         this.$router.push({path: '/'})
         this.$store.state.firstLoad = true
       }
     },
     created () {
-      document.body.scrollTop = 0
-      document.documentElement.scrollTop = 0
+      this.toTop()
       this.axios.get('http://39.108.155.202/jsons/comics/' + this.$route.query.id + '/' + this.$route.query.id + '.json').then((res) => {
         this.chapters = res.data.detail
       })

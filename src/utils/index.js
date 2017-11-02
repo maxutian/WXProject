@@ -12,5 +12,9 @@ export default{
       this.$store.state.rightColumn = []
       this.$store.state.allColumns = []
     }
+    Vue.prototype.toTop = function () {
+      document.body.scrollTop = 0
+      document.documentElement.scrollTop = 0
+    }
   }
 }
